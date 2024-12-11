@@ -16,8 +16,8 @@ module.exports = {
     { match: "routes", src: ".*", dest: "/index.html" },
   ],
   optimize: {
-    // Uncomment to enable bundling in production
-    // bundle: true,
+    // Enable bundling in production
+    bundle: true,
   },
   packageOptions: {
     /* Add package-specific options here */
