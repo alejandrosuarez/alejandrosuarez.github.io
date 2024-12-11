@@ -1,6 +1,6 @@
 # Website
 
-Thanks to @lithafnium (steve-li.com) for inspiration and a solid starting point. I expanded on their project with:
+Thanks to Steve Li Github user @lithafnium (steve-li.com) for inspiration and a solid starting point. I expanded on their project with:
 
 - Blog Tab: A space for sharing thoughts and tutorials.
 - Markdown to React Converter: Dynamically turns Markdown files into React pages. Planning to use this for project docs & blog posts.
