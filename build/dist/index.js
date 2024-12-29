@@ -7879,39 +7879,26 @@ var Action;
   Action2["Replace"] = "REPLACE";
 })(Action || (Action = {}));
 var PopStateEventType = "popstate";
-function createHashHistory(options) {
+function createBrowserHistory(options) {
   if (options === void 0) {
     options = {};
   }
-  function createHashLocation(window2, globalHistory) {
+  function createBrowserLocation(window2, globalHistory) {
     let {
-      pathname = "/",
-      search = "",
-      hash = ""
-    } = parsePath(window2.location.hash.substr(1));
-    if (!pathname.startsWith("/") && !pathname.startsWith(".")) {
-      pathname = "/" + pathname;
-    }
+      pathname,
+      search,
+      hash
+    } = window2.location;
     return createLocation("", {
       pathname,
       search,
       hash
     }, globalHistory.state && globalHistory.state.usr || null, globalHistory.state && globalHistory.state.key || "default");
   }
-  function createHashHref(window2, to2) {
-    let base = window2.document.querySelector("base");
-    let href = "";
-    if (base && base.getAttribute("href")) {
-      let url = window2.location.href;
-      let hashIndex = url.indexOf("#");
-      href = hashIndex === -1 ? url : url.slice(0, hashIndex);
-    }
-    return href + "#" + (typeof to2 === "string" ? to2 : createPath(to2));
+  function createBrowserHref(window2, to2) {
+    return typeof to2 === "string" ? to2 : createPath(to2);
   }
-  function validateHashLocation(location, to2) {
-    warning(location.pathname.charAt(0) === "/", "relative pathnames are not supported in hash history.push(" + JSON.stringify(to2) + ")");
-  }
-  return getUrlBasedHistory(createHashLocation, createHashHref, validateHashLocation, options);
+  return getUrlBasedHistory(createBrowserLocation, createBrowserHref, null, options);
 }
 function invariant(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
@@ -11791,13 +11778,13 @@ try {
   window.__reactRouterVersion = REACT_ROUTER_VERSION;
 } catch (e2) {
 }
-function createHashRouter(routes2, opts) {
+function createBrowserRouter(routes2, opts) {
   return createRouter({
     basename: opts == null ? void 0 : opts.basename,
     future: _extends$2({}, opts == null ? void 0 : opts.future, {
       v7_prependBasename: true
     }),
-    history: createHashHistory({
+    history: createBrowserHistory({
       window: opts == null ? void 0 : opts.window
     }),
     hydrationData: (opts == null ? void 0 : opts.hydrationData) || parseHydrationData(),
@@ -20633,7 +20620,7 @@ var routes = [
     element: withSuspense_default(NotFound)({})
   }
 ];
-var router = createHashRouter(routes);
+var router = createBrowserRouter(routes);
 var router_default = router;
 
 // build/dist/styles/globalStyles.js
