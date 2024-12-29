@@ -23,7 +23,7 @@ If you plot all possible investment mixes, you get a curve called the “efficie
 - You cannot get returns above this curve given your level of risk.
 - If you’re below the curve, you are taking more risk than necessary for the same return (you don’t want that).
 
-![Efficient Frontier](photos/guide-to-investing/efficient_frontier.png)
+![Efficient Frontier](/blog/photos/guide-to-investing/efficient_frontier.png)
 
 ### Bottom Line: **Passive Investing**
 
@@ -63,7 +63,7 @@ For example, at 9% return per year, your money doubles about every 8 years. Over
 
 The exact split between U.S. and international stocks isn’t critical for beginners. Many just pick a broadly diversified U.S. stock fund and possibly add an international fund later.
 
-![Portfolio Split](photos/guide-to-investing/portfolio_split.png "Portfolio Split")
+![Portfolio Split](/blog/photos/guide-to-investing/portfolio_split.png "Portfolio Split")
 
 ---
 

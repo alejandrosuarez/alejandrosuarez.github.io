@@ -36,11 +36,11 @@ I think it would be really cool to expand my hobbies into the website and create
 
 *A photo I took when I was working in the Bay on Pfeiffer Beach in Big Sur*
 
-![Pfeiffer Beach Big Sur](photos/big_sur.jpeg "Pfeiffer Beach Big Sur")
+![Pfeiffer Beach Big Sur](/blog/photos/hello-world/big_sur.jpeg "Pfeiffer Beach Big Sur")
 
 *Another photo in Bolivia at the Salar de Uyuni!*
 
-![Salar de Uyuni](photos/uyuni.jpeg "Salar de Uyuni")
+![Salar de Uyuni](/blog/photos/hello-world/uyuni.jpeg "Salar de Uyuni")
 
 - **Music**: I own ~100 vinyls and I just keep them in my room. I think it would be cool to have a way to look through my library online.
 - **Reading List**: I might keep track of all the books I want to read, along with summaries and learnings year-to-year. Was inspired by [anantjain.dev](https://anantjain.dev "Anant Jain's Personal Website").
