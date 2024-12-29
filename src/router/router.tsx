@@ -1,4 +1,3 @@
-// router.tsx
 import { lazy } from "react";
 import { createHashRouter, RouteObject } from "react-router-dom";
 import withSuspense from "./withSuspense";
@@ -10,11 +9,11 @@ const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
 const routes: RouteObject[] = [
   {
-    path: "/",                 // This becomes "#/" in the final URL
+    path: "/",
     element: withSuspense(Main)({}),
   },
   {
-    path: "/blog/:slug",       // This becomes "#/blog/:slug"
+    path: "/blog/:slug",
     element: withSuspense(MarkdownRenderer)({}),
   },
   {
@@ -23,7 +22,6 @@ const routes: RouteObject[] = [
   },
 ];
 
-// IMPORTANT: Replace createBrowserRouter with createHashRouter
 const router = createHashRouter(routes);
 
 export default router;
