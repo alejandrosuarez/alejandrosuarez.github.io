@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createHashRouter, RouteObject } from "react-router-dom";
 import withSuspense from "./withSuspense";
 
 // Lazy-loaded page components
@@ -22,6 +22,6 @@ const routes: RouteObject[] = [
   },
 ];
 
-const router = createBrowserRouter(routes);
+const router = createHashRouter(routes);
 
 export default router;
