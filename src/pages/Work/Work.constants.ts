@@ -1,4 +1,5 @@
 export const COMPANIES: any = [
+  "Complete (YC W22)",
   "Health Harbor (YC S23)",
   "Goldman Sachs",
   "Meta",
@@ -7,9 +8,17 @@ export const COMPANIES: any = [
 
 export const DESCRIPTIONS: any = [
   {
+    role: "Incoming Founding Software Engineer",
+    link: "https://www.complete.so/",
+    date: "January 2025",
+    description: [
+      "Building the future of compensation!"
+    ],
+  },
+  {
     role: "Founding Software Engineer",
-    link: "https://www.roblox.com/",
-    date: "June 2024 - Present",
+    link: "https://www.healthharbor.co/",
+    date: "June 2024 - December 2024",
     description: [
     //   "Helped scale backend and API, increasing MRR from $500 to ~10,000.",
     //   "Helped scale inquiry automation requests from a 6-figure customer with the AI call agent, and post-processing of call transcripts to JSON to return results to the customer.",

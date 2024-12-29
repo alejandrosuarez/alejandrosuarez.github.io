@@ -57,6 +57,9 @@ export const StyledPre = styled.pre`
   }
 `;
 
+export const StyledBold = styled.strong`
+  color: #C4554D;
+`;
 
 export const MarkdownWrapper = styled.div`
   width: 100%;
@@ -159,3 +162,28 @@ export const MarkdownWrapper = styled.div`
   }
 `;
 
+export const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+`;
+
+export const CenteredImage = styled.img`
+  display: block;
+  margin: 1em auto;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid ${grayscale[200]};
+  // box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+
+  @media (max-width: 600px) {
+    max-width: 90%;
+  }
+`;

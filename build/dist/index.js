@@ -67,6 +67,12 @@ var require_MarkdownRenderer = __commonJS((exports) => {
           },
           table: {
             component: StyledTable
+          },
+          strong: {
+            component: StyledBold
+          },
+          img: {
+            component: CenteredImage
           }
         }
       }
@@ -7873,26 +7879,39 @@ var Action;
   Action2["Replace"] = "REPLACE";
 })(Action || (Action = {}));
 var PopStateEventType = "popstate";
-function createBrowserHistory(options) {
+function createHashHistory(options) {
   if (options === void 0) {
     options = {};
   }
-  function createBrowserLocation(window2, globalHistory) {
+  function createHashLocation(window2, globalHistory) {
     let {
-      pathname,
-      search,
-      hash
-    } = window2.location;
+      pathname = "/",
+      search = "",
+      hash = ""
+    } = parsePath(window2.location.hash.substr(1));
+    if (!pathname.startsWith("/") && !pathname.startsWith(".")) {
+      pathname = "/" + pathname;
+    }
     return createLocation("", {
       pathname,
       search,
       hash
     }, globalHistory.state && globalHistory.state.usr || null, globalHistory.state && globalHistory.state.key || "default");
   }
-  function createBrowserHref(window2, to2) {
-    return typeof to2 === "string" ? to2 : createPath(to2);
+  function createHashHref(window2, to2) {
+    let base = window2.document.querySelector("base");
+    let href = "";
+    if (base && base.getAttribute("href")) {
+      let url = window2.location.href;
+      let hashIndex = url.indexOf("#");
+      href = hashIndex === -1 ? url : url.slice(0, hashIndex);
+    }
+    return href + "#" + (typeof to2 === "string" ? to2 : createPath(to2));
   }
-  return getUrlBasedHistory(createBrowserLocation, createBrowserHref, null, options);
+  function validateHashLocation(location, to2) {
+    warning(location.pathname.charAt(0) === "/", "relative pathnames are not supported in hash history.push(" + JSON.stringify(to2) + ")");
+  }
+  return getUrlBasedHistory(createHashLocation, createHashHref, validateHashLocation, options);
 }
 function invariant(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
@@ -11772,13 +11791,13 @@ try {
   window.__reactRouterVersion = REACT_ROUTER_VERSION;
 } catch (e2) {
 }
-function createBrowserRouter(routes2, opts) {
+function createHashRouter(routes2, opts) {
   return createRouter({
     basename: opts == null ? void 0 : opts.basename,
     future: _extends$2({}, opts == null ? void 0 : opts.future, {
       v7_prependBasename: true
     }),
-    history: createBrowserHistory({
+    history: createHashHistory({
       window: opts == null ? void 0 : opts.window
     }),
     hydrationData: (opts == null ? void 0 : opts.hydrationData) || parseHydrationData(),
@@ -18977,6 +18996,9 @@ var StyledPre = styled_components_default.pre`
     border: none; /* Reset any border styles */
   }
 `;
+var StyledBold = styled_components_default.strong`
+  color: #C4554D;
+`;
 var MarkdownWrapper = styled_components_default.div`
   width: 100%;
   margin-top: 2em;
@@ -19075,6 +19097,30 @@ var MarkdownWrapper = styled_components_default.div`
   hr {
     margin-top: 3em;
     margin-bottom: 3em;
+  }
+`;
+var ImageWrapper = styled_components_default.div`
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+`;
+var CenteredImage = styled_components_default.img`
+  display: block;
+  margin: 1em auto;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid ${grayscale2[200]};
+  // box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+
+  @media (max-width: 600px) {
+    max-width: 90%;
   }
 `;
 
@@ -20017,8 +20063,15 @@ var BLOG_POSTS = [
     slug: "hello-world",
     title: "def helloWorld():",
     date: "December 9, 2024",
-    description: "My first blog post! A short introduction to myself and what I hope to achieve with victorgoncalves.com",
+    description: "My first blog post! A short introduction to myself and what I hope to achieve with victorgoncalves.com.",
     tags: ["Introduction"]
+  },
+  {
+    slug: "guide-to-investing",
+    title: "A Practical Guide to Investing",
+    date: "December 20, 2024",
+    description: "A guide to investing tailored for young professionals & beginners.",
+    tags: ["Personal Finance", "Investing"]
   }
 ];
 
@@ -20096,17 +20149,21 @@ var StyledLink = styled_components_default(Link)`
 
 // build/dist/pages/Blog/Blog.js
 var Home = () => {
-  return /* @__PURE__ */ react.createElement(ContainerInner4, null, /* @__PURE__ */ react.createElement("p", null, "some thoughts and learnings from over the years"), BLOG_POSTS.map((p5) => {
+  const sortedPosts = [...BLOG_POSTS].sort((a2, b3) => new Date(b3.date).getTime() - new Date(a2.date).getTime());
+  return /* @__PURE__ */ react.createElement(ContainerInner4, null, /* @__PURE__ */ react.createElement("p", null, "Some thoughts and learnings from over the years"), sortedPosts.map((post) => {
+    const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    });
     return /* @__PURE__ */ react.createElement(StyledLink, {
-      to: `/blog/${p5.slug}`,
-      key: p5.slug
-    }, /* @__PURE__ */ react.createElement(BlogPost, null, /* @__PURE__ */ react.createElement(BlogPostHeading, null, /* @__PURE__ */ react.createElement("h3", null, p5.title)), /* @__PURE__ */ react.createElement(Date2, null, p5.date), /* @__PURE__ */ react.createElement(Description, {
+      to: `/blog/${post.slug}`,
+      key: post.slug
+    }, /* @__PURE__ */ react.createElement(BlogPost, null, /* @__PURE__ */ react.createElement(BlogPostHeading, null, /* @__PURE__ */ react.createElement("h3", null, post.title)), /* @__PURE__ */ react.createElement(Date2, null, formattedDate), /* @__PURE__ */ react.createElement(Description, {
       style: {marginBottom: "0px"}
-    }, p5.description), /* @__PURE__ */ react.createElement(Tags, null, p5.tags.map((t4) => {
-      return /* @__PURE__ */ react.createElement(Label, {
-        key: t4
-      }, /* @__PURE__ */ react.createElement("p", null, t4));
-    }))));
+    }, post.description), /* @__PURE__ */ react.createElement(Tags, null, post.tags.map((tag) => /* @__PURE__ */ react.createElement(Label, {
+      key: tag
+    }, /* @__PURE__ */ react.createElement("p", null, tag))))));
   }));
 };
 var Blog_default = Home;
@@ -20262,6 +20319,7 @@ var Projects_default = Projects;
 
 // build/dist/pages/Work/Work.constants.js
 var COMPANIES = [
+  "Complete (YC W22)",
   "Health Harbor (YC S23)",
   "Goldman Sachs",
   "Meta",
@@ -20269,9 +20327,17 @@ var COMPANIES = [
 ];
 var DESCRIPTIONS = [
   {
+    role: "Incoming Founding Software Engineer",
+    link: "https://www.complete.so/",
+    date: "January 2025",
+    description: [
+      "Building the future of compensation!"
+    ]
+  },
+  {
     role: "Founding Software Engineer",
-    link: "https://www.roblox.com/",
-    date: "June 2024 - Present",
+    link: "https://www.healthharbor.co/",
+    date: "June 2024 - December 2024",
     description: [
       "Scaled backend systems and APIs, increasing MRR from $500 to approximately $10,000.",
       "Enhanced inquiry automation for a major six-figure client by improving in-call AI agent and post-processing.",
@@ -20567,7 +20633,7 @@ var routes = [
     element: withSuspense_default(NotFound)({})
   }
 ];
-var router = createBrowserRouter(routes);
+var router = createHashRouter(routes);
 var router_default = router;
 
 // build/dist/styles/globalStyles.js

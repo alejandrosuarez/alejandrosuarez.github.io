@@ -14,8 +14,10 @@ import Prism from "prismjs";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
+  CenteredImage,
   InlineCode,
   MarkdownWrapper,
+  StyledBold,
   StyledPre,
   StyledTable,
 } from "./MarkdownRenderer.styles";
@@ -94,6 +96,12 @@ const MarkdownRenderer: React.FC = () => {
                   // Override for tables
                   table: {
                     component: StyledTable,
+                  },
+                  strong: {
+                    component: StyledBold,
+                  },
+                  img: {
+                    component: CenteredImage,
                   },
                 },
               }}

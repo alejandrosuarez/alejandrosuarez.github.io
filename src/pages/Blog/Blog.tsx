@@ -1,41 +1,49 @@
 import React from "react";
 import { BLOG_POSTS } from "./Blog.constants";
 import {
-  BlogPost,
   BlogPostHeading,
   ContainerInner,
-  Date,
   Description,
   Label,
+  BlogPost as StyledBlogPost,
+  Date as StyledDate,
   StyledLink,
   Tags,
 } from "./Blog.styles";
 
 const Home = () => {
+  // Sort blog posts by date in descending order
+  const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <ContainerInner>
-      <p>some thoughts and learnings from over the years</p>
-      {BLOG_POSTS.map((p) => {
+      <p>Some thoughts and learnings from over the years</p>
+      {sortedPosts.map((post) => {
+        // Format the date for display
+        const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        });
+
         return (
-          <StyledLink to={`/blog/${p.slug}`} key={p.slug}>
-            <BlogPost>
+          <StyledLink to={`/blog/${post.slug}`} key={post.slug}>
+            <StyledBlogPost>
               <BlogPostHeading>
-                <h3>{p.title}</h3>
+                <h3>{post.title}</h3>
               </BlogPostHeading>
-              <Date>{p.date}</Date>
+              <StyledDate>{formattedDate}</StyledDate>
               <Description style={{ marginBottom: "0px" }}>
-                {p.description}
+                {post.description}
               </Description>
               <Tags>
-                {p.tags.map((t) => {
-                  return (
-                    <Label key={t}>
-                      <p>{t}</p>
-                    </Label>
-                  );
-                })}
+                {post.tags.map((tag) => (
+                  <Label key={tag}>
+                    <p>{tag}</p>
+                  </Label>
+                ))}
               </Tags>
-            </BlogPost>
+            </StyledBlogPost>
           </StyledLink>
         );
       })}

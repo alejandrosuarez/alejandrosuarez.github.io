@@ -1,5 +1,6 @@
+// router.tsx
 import { lazy } from "react";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createHashRouter, RouteObject } from "react-router-dom";
 import withSuspense from "./withSuspense";
 
 // Lazy-loaded page components
@@ -9,11 +10,11 @@ const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: "/",                 // This becomes "#/" in the final URL
     element: withSuspense(Main)({}),
   },
   {
-    path: "/blog/:slug",
+    path: "/blog/:slug",       // This becomes "#/blog/:slug"
     element: withSuspense(MarkdownRenderer)({}),
   },
   {
@@ -22,6 +23,7 @@ const routes: RouteObject[] = [
   },
 ];
 
-const router = createBrowserRouter(routes);
+// IMPORTANT: Replace createBrowserRouter with createHashRouter
+const router = createHashRouter(routes);
 
 export default router;

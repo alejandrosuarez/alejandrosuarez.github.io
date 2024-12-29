@@ -34,9 +34,9 @@ I think it would be really cool to expand my hobbies into the website and create
 
 - **Photography**: I became really into photography during my freshman year of college, and took some really amazing shots over the past 4 years! In order to focus on school, I took some time off, but I might get back into it.
 
-*A photo I took when I was working in the Bay on Pfeiffer Beach in Big Sir*
+*A photo I took when I was working in the Bay on Pfeiffer Beach in Big Sur*
 
-![Pfeiffer Beach Big Sir](photos/big_sir.jpeg "Pfeiffer Beach Big Sir")
+![Pfeiffer Beach Big Sur](photos/big_sur.jpeg "Pfeiffer Beach Big Sur")
 
 *Another photo in Bolivia at the Salar de Uyuni!*
 
